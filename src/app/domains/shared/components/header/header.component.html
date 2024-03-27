@@ -29,7 +29,8 @@
       </ul>
     </div>
     <div class="flex items-center">
-      <button class="px-4" (click)="toggleSideMenu()">
+      <button class="p-2 border rounded relative" (click)="toggleSideMenu()">
+        <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs">{{ cart.length }}</div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -72,4 +73,32 @@
       </svg>
     </button>
   </div>
+
+  <!-- <div>
+    <div *ngFor="let product of cart">
+      <p>{{ product.title }}</p>
+      <p>{{ product.price }}</p>
+    </div>
+  </div> -->
+
+  <ul class="max-w-md divide-y divide-gray-200">
+    @for(product of cart; track product;){
+      <li class="py-3 sm:pb-4">
+        <div class="flex items-center space-x-4 rtl:space-x-reverse">
+           <div class="flex-shrink-0">
+              <img class="w-16 h-16" [src]="product.image" alt="Neil image">
+           </div>
+           <div class="flex-1 min-w-0">
+              <p class="text-lg font-medium text-gray-900 truncate">
+                 {{product.title}}
+              </p>
+           </div>
+           <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+              ${{product.price}}
+           </div>
+        </div>
+      </li>
+    }
+  </ul>
+
 </div>

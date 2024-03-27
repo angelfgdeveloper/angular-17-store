@@ -13,7 +13,9 @@ import { HeaderComponent } from '../../../shared/components/header/header.compon
   styleUrl: './list.component.css',
 })
 export class ListComponent {
+
   products = signal<Product[]>([]);
+  cart = signal<Product[]>([]);
 
   constructor() {
     const initProducts: Product[] = [
@@ -68,4 +70,9 @@ export class ListComponent {
     console.log('Estamos en el padre');
     console.log('event', event);
   }
+
+  addToCart(product: Product) {
+    this.cart.update(prevState => [...prevState, product]);
+  }
+
 }
