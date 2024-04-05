@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, SimpleChanges, signal } from '@angular/core';
 import { Product } from '../../models/product.model';
 
 @Component({
@@ -12,6 +12,7 @@ import { Product } from '../../models/product.model';
 export class HeaderComponent {
 
   hideSideMenu = signal(true);
+  total = signal(0);
 
   @Input({ required: true }) cart: Product[] = [];
 
@@ -20,6 +21,20 @@ export class HeaderComponent {
   }
 
   getTotalPrice() {
+    return this.cart.reduce((total, product) => total + product.price, 0);
+  }
+
+  // Mejor solucion para rendimiento al momento de sumar un total
+  ngOnChanges(changes: SimpleChanges) {
+    const cart = changes['cart'];
+
+    if (cart) {
+      this.total.set(this.calculateTotal());
+    }
+
+  }
+
+  calculateTotal() {
     return this.cart.reduce((total, product) => total + product.price, 0);
   }
 
