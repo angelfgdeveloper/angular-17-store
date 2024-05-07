@@ -12,3 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient()
   ]
 };
+
+// Cambiar a la version 17 nueva con:
+// ng g @angular/core:control-flow
+// ./
